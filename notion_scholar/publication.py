@@ -5,7 +5,8 @@ class Publication(NamedTuple):
     """NamedTuple object used to store a bibtex publication reference."""
     key: str
     title: str
-    authors: str
+    author1: str
+    author2: str
     year: int
     journal: str
     url: str

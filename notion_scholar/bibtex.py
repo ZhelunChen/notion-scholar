@@ -70,11 +70,16 @@ def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
     """
     publications = []
     for entry in bib_database.entries:
+        # Extracting the first two authors (ZC 08/20/2023)
+        authors_string = entry.get('author', '').replace('\n', ' ')
+        first_author = authors_string.split(' and ')[0]
+        second_author = authors_string.split(' and ')[1]
         publications.append(
             Publication(
                 key=entry.get('ID', ''),
                 title=entry.get('title', ''),
-                authors=entry.get('author', '').replace('\n', ' '),
+                author1=first_author,
+                author2=second_author,
                 year=int(entry['year']) if 'year' in entry.keys() else None,
                 journal=entry.get('journal', ''),
                 url=entry.get('url', ''),
