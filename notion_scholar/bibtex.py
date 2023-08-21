@@ -72,8 +72,10 @@ def get_publication_list(bib_database: BibDatabase) -> List[Publication]:
     for entry in bib_database.entries:
         # Extracting the first two authors (ZC 08/20/2023)
         authors_string = entry.get('author', '').replace('\n', ' ')
-        first_author = authors_string.split(' and ')[0]
-        second_author = authors_string.split(' and ')[1]
+        authors_list = authors_string.split(' and ')
+        first_author = authors_list[0]
+        second_author = authors_list[1] if len(authors_list) > 1 else ''
+        # Append to publications
         publications.append(
             Publication(
                 key=entry.get('ID', ''),
